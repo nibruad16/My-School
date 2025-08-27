@@ -20,9 +20,9 @@ class DashboardPage extends StatelessWidget {
               'Welcome to My School!',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             Text(
-              'Your journey to efficient school management begins here.',
+              'This is your screen',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
