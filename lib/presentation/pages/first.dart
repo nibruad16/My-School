@@ -8,6 +8,16 @@ class firstscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFF0077C8),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const SecondScreen()),
+          );
+        },
+        child: const Icon(Icons.arrow_forward, color: Colors.white),
+      ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
