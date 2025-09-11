@@ -1,10 +1,13 @@
 // lib/features/auth/presentation/pages/dashboard_page.dart
 import 'package:flutter/material.dart';
 
-// Import all the pages you've created for a teacher's use
+// Import all the pages you've created or will create
 import 'package:myapp/features/attendance/presentation/pages/attendance_page.dart';
 import 'package:myapp/features/results/presentation/pages/result_page.dart';
-import 'package:myapp/features/homework/presentation/pages/homework_submission_page.dart';
+import 'package:myapp/features/teacher/presentation/pages/class_list_page.dart'; // We'll link to this
+import 'package:myapp/features/teacher/presentation/pages/create_assessment_page.dart';
+import 'package:myapp/features/teacher/presentation/pages/student_roster_page.dart';
+import 'package:myapp/features/teacher/presentation/pages/single_student_mark_page.dart';
 import 'package:myapp/features/auth/presentation/pages/add_account_page.dart';
 
 class TeacherDashboardPage extends StatelessWidget {
@@ -12,31 +15,30 @@ class TeacherDashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color primaryBlue = Color(
-      0xFF3F51B5,
-    ); // A shade of blue from your design (e.g., AppBar)
+    const Color primaryBlue = Color(0xFF3F51B5); // Consistent blue
+    const Color primaryGreen = Color(0xFF26A69A); // Consistent green
 
-    // Define the items for the teacher's dashboard grid
     final List<Map<String, dynamic>> dashboardItems = [
+      {'title': 'Browse Classes', 'icon': Icons.school, 'color': primaryBlue},
       {
-        'title': 'Attendance',
+        'title': 'Create Assessment',
+        'icon': Icons.assignment_add,
+        'color': primaryGreen,
+      },
+      {
+        'title': 'Fill Attendance',
         'icon': Icons.calendar_today_outlined,
         'color': Colors.indigo,
       },
       {
-        'title': 'Homework',
-        'icon': Icons.assignment_outlined,
-        'color': Colors.blueAccent,
+        'title': 'Submit Results',
+        'icon': Icons.grade_outlined,
+        'color': Colors.green,
       },
-      {'title': 'Result', 'icon': Icons.grade_outlined, 'color': Colors.green},
+      {'title': 'View Roster', 'icon': Icons.list_alt, 'color': Colors.orange},
       {
-        'title': 'Exam Routine',
-        'icon': Icons.schedule_outlined,
-        'color': Colors.orange,
-      },
-      {
-        'title': 'Solution',
-        'icon': Icons.lightbulb_outline,
+        'title': 'View Single Mark',
+        'icon': Icons.person_search,
         'color': Colors.purple,
       },
       {
@@ -47,22 +49,18 @@ class TeacherDashboardPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: Colors.grey[100], // Light grey background as in design
+      backgroundColor: Colors.grey[100],
       body: CustomScrollView(
         slivers: [
-          // Custom AppBar with curved bottom and welcome message
           SliverAppBar(
-            expandedHeight: 200.0, // Height of the expanded app bar
+            expandedHeight: 200.0,
             floating: false,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [
-                      primaryBlue,
-                      Color(0xFF5C6BC0),
-                    ], // Darker to lighter blue
+                    colors: [primaryBlue, Color(0xFF5C6BC0)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -93,13 +91,13 @@ class TeacherDashboardPage extends StatelessWidget {
                               Icons.sentiment_satisfied_alt,
                               size: 40,
                               color: Colors.blueGrey,
-                            ), // User icon
+                            ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 15),
                       const Text(
-                        'Welcome, Teacher →', // Modified welcome message for clarity
+                        'Welcome, Teacher!',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 22,
@@ -108,7 +106,7 @@ class TeacherDashboardPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       const Text(
-                        'The standard Lorem ipsum passage, used since the 1500s.', // Placeholder text
+                        'Manage your classes, students, and tasks.',
                         style: TextStyle(color: Colors.white70, fontSize: 14),
                       ),
                     ],
@@ -117,16 +115,14 @@ class TeacherDashboardPage extends StatelessWidget {
               ),
             ),
           ),
-
-          // Grid of Dashboard Items
           SliverPadding(
             padding: const EdgeInsets.all(20.0),
             sliver: SliverGrid(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // 2 items per row
+                crossAxisCount: 2,
                 crossAxisSpacing: 15.0,
                 mainAxisSpacing: 15.0,
-                childAspectRatio: 1.2, // Adjust card height
+                childAspectRatio: 1.2,
               ),
               delegate: SliverChildBuilderDelegate((
                 BuildContext context,
@@ -138,38 +134,66 @@ class TeacherDashboardPage extends StatelessWidget {
                   icon: item['icon'],
                   color: item['color'],
                   onTap: () {
-                    // Handle navigation for each grid item based on its title
-                    if (item['title'] == 'Attendance') {
+                    if (item['title'] == 'Browse Classes') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ClassListPage(),
+                        ),
+                      );
+                    } else if (item['title'] == 'Create Assessment') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CreateAssessmentPage(),
+                        ),
+                      );
+                    } else if (item['title'] == 'Fill Attendance') {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const AttendancePage(),
                         ),
                       );
-                    } else if (item['title'] == 'Homework') {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomeworkSubmissionPage(),
-                        ),
-                      );
-                    } else if (item['title'] == 'Result') {
+                    } else if (item['title'] == 'Submit Results') {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const ResultPage(),
                         ),
                       );
+                    } else if (item['title'] == 'View Roster') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const StudentRosterPage(className: 'Class 3 A'),
+                        ),
+                      );
+                    } else if (item['title'] == 'View Single Mark') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SingleStudentMarkPage(
+                            studentName: 'Prajesh Shakya',
+                          ),
+                        ),
+                      );
+                    } else {
+                      // Placeholder for other functionalities
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            '${item['title']} functionality coming soon!',
+                          ),
+                        ),
+                      );
                     }
-                    // You can add navigation for other items here later
-                    print('${item['title']} clicked!');
                   },
                 );
               }, childCount: dashboardItems.length),
             ),
           ),
-
-          // Add Account Button at the bottom
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -182,7 +206,7 @@ class TeacherDashboardPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const AddAccountPage(),
-                    ), // Navigate to Add Account
+                    ),
                   );
                 },
                 icon: const Icon(Icons.person_add_alt_1, color: Colors.white),
@@ -201,16 +225,13 @@ class TeacherDashboardPage extends StatelessWidget {
               ),
             ),
           ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 20),
-          ), // Bottom padding
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
         ],
       ),
     );
   }
 }
 
-// Custom Widget for Dashboard Grid Items
 class DashboardGridItem extends StatelessWidget {
   final String title;
   final IconData icon;
