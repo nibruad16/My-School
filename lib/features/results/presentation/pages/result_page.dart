@@ -5,6 +5,9 @@ class ResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text('Result Page')));
+    return Scaffold(
+      appBar: AppBar(title: const Text('Result Page')),
+      body: Center(child: Text('Result Page')),
+    );
   }
 }
