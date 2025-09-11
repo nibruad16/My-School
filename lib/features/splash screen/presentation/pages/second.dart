@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/presentation/pages/login_screen.dart';
+import 'package:myapp/features/auth/presentation/pages/login_screen.dart';
 
 class SecondScreen extends StatelessWidget {
   const SecondScreen({super.key});

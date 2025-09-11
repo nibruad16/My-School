@@ -1,19 +1,22 @@
 // lib/features/auth/presentation/pages/dashboard_page.dart
 import 'package:flutter/material.dart';
-import 'package:myapp/presentation/pages/homework_submission_page.dart';
-import 'package:myapp/presentation/pages/add_account_page.dart';
+
+// Import all the pages you've created for a teacher's use
+import 'package:myapp/features/attendance/presentation/pages/attendance_page.dart';
+import 'package:myapp/features/results/presentation/pages/result_page.dart';
+import 'package:myapp/features/homework/presentation/pages/homework_submission_page.dart';
+import 'package:myapp/features/auth/presentation/pages/add_account_page.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const Color primaryGreen = Color(0xFF26A69A);
+    const Color primaryBlue = Color(
+      0xFF3F51B5,
+    ); // A shade of blue from your design (e.g., AppBar)
 
-    // A shade of blue from your design (e.g., AppBar)
-    // From previous screen
-
-    // Define the items for the dashboard grid
+    // Define the items for the teacher's dashboard grid
     final List<Map<String, dynamic>> dashboardItems = [
       {
         'title': 'Attendance',
@@ -41,7 +44,6 @@ class DashboardPage extends StatelessWidget {
         'icon': Icons.campaign_outlined,
         'color': Colors.redAccent,
       },
-      // You can add 'Add Account' here as a navigation item too if it's a separate screen
     ];
 
     return Scaffold(
@@ -58,7 +60,7 @@ class DashboardPage extends StatelessWidget {
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      primaryGreen,
+                      primaryBlue,
                       Color(0xFF5C6BC0),
                     ], // Darker to lighter blue
                     begin: Alignment.topLeft,
@@ -81,10 +83,8 @@ class DashboardPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // Empty space on the left
-                          // Same width as the icon container
                           Container(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8),
                             decoration: const BoxDecoration(
                               color: Colors.white,
                               shape: BoxShape.circle,
@@ -99,7 +99,7 @@ class DashboardPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 15),
                       const Text(
-                        'Welcome Message →',
+                        'Welcome, Teacher →', // Modified welcome message for clarity
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 22,
@@ -138,17 +138,31 @@ class DashboardPage extends StatelessWidget {
                   icon: item['icon'],
                   color: item['color'],
                   onTap: () {
-                    // TODO: Implement navigation for each item
-                    print('${item['title']} clicked!');
-                    if (item['title'] == 'Homework') {
+                    // Handle navigation for each grid item based on its title
+                    if (item['title'] == 'Attendance') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AttendancePage(),
+                        ),
+                      );
+                    } else if (item['title'] == 'Homework') {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const HomeworkSubmissionPage(),
-                        ), // Navigate to Homework
+                        ),
+                      );
+                    } else if (item['title'] == 'Result') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ResultPage(),
+                        ),
                       );
                     }
-                    // Example: if (item['title'] == 'Attendance') { Navigator.push(...); }
+                    // You can add navigation for other items here later
+                    print('${item['title']} clicked!');
                   },
                 );
               }, childCount: dashboardItems.length),
@@ -177,7 +191,7 @@ class DashboardPage extends StatelessWidget {
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: primaryGreen,
+                  backgroundColor: primaryBlue,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/presentation/pages/dashboard_page.dart';
-import 'package:myapp/presentation/pages/sign_up_screen.dart';
+import 'package:myapp/features/dashboard/presentation/pages/teacher_dashboard_page.dart';
+import 'package:myapp/features/auth/presentation/pages/sign_up_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   final String role;
