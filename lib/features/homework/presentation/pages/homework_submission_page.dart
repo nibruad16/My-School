@@ -36,7 +36,6 @@ class _HomeworkSubmissionPageState extends State<HomeworkSubmissionPage> {
   @override
   Widget build(BuildContext context) {
     const Color primaryBlue = Color(0xFF3F51B5); // Consistent blue color
-    const Color lightGrey = Color(0xFFEEEEEE); // Light grey for card background
 
     return Scaffold(
       backgroundColor: Colors.white,

@@ -7,8 +7,8 @@ import 'package:myapp/features/results/presentation/pages/result_page.dart';
 import 'package:myapp/features/homework/presentation/pages/homework_submission_page.dart';
 import 'package:myapp/features/auth/presentation/pages/add_account_page.dart';
 
-class DashboardPage extends StatelessWidget {
-  const DashboardPage({super.key});
+class TeacherDashboardPage extends StatelessWidget {
+  const TeacherDashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {

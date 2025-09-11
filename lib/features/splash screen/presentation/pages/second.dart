@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/features/auth/presentation/pages/login_screen.dart';
+import 'package:myapp/features/dashboard/presentation/pages/student_dashboard_page.dart';
+import 'package:myapp/features/dashboard/presentation/pages/teacher_dashboard_page.dart'
+    as teacher;
 
 class SecondScreen extends StatelessWidget {
   const SecondScreen({super.key});
@@ -100,8 +103,7 @@ class SecondScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                const LoginScreen(role: 'Student'),
+                            builder: (context) => StudentDashboardPage(),
                           ),
                         );
                       },
@@ -114,7 +116,7 @@ class SecondScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                const LoginScreen(role: 'Teacher'),
+                                teacher.TeacherDashboardPage(),
                           ),
                         );
                       },
