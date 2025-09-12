@@ -1,21 +1,20 @@
 // lib/features/dashboard/presentation/pages/student_dashboard_page.dart
 import 'package:flutter/material.dart';
 
-// We'll import these pages once they are created
-// import 'package:my_school_app/features/results/presentation/pages/student_result_page.dart';
-// import 'package:my_school_app/features/attendance/presentation/pages/student_attendance_page.dart';
-// import 'package:my_school_app/features/results/presentation/pages/student_rank_page.dart';
+// Import the student-specific pages for navigation
+import 'package:myapp/features/results/presentation/pages/student_results_page.dart';
+import 'package:myapp/features/attendance/presentation/pages/student_attendance_page.dart';
+import 'package:myapp/features/results/presentation/pages/student_rank_page.dart';
 
 class StudentDashboardPage extends StatelessWidget {
   const StudentDashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // You can choose a different color to distinguish the student dashboard
+    // Reusing the same color palette for consistency
     const Color primaryGreen = Color(0xFF26A69A);
     const Color lightGreen = Color(0xFF66BB6A);
 
-    // Define the items for the student's dashboard grid
     final List<Map<String, dynamic>> dashboardItems = [
       {
         'title': 'View Rank',
@@ -32,14 +31,13 @@ class StudentDashboardPage extends StatelessWidget {
         'icon': Icons.calendar_month_outlined,
         'color': Colors.orange,
       },
-      // You can add more student-specific items here
     ];
 
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: CustomScrollView(
         slivers: [
-          // Top section with welcome message (similar to teacher's dashboard)
+          // Dynamic header with gradient, consistent with the teacher's dashboard
           SliverAppBar(
             expandedHeight: 200.0,
             floating: false,
@@ -57,34 +55,26 @@ class StudentDashboardPage extends StatelessWidget {
                     bottomRight: Radius.circular(30),
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 60.0,
-                    left: 20.0,
-                    right: 20.0,
-                  ),
+                child: const Padding(
+                  padding: EdgeInsets.only(top: 60.0, left: 20.0, right: 20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: const BoxDecoration(
+                          Padding(
+                            padding: EdgeInsets.only(top: 25.0),
+                            child: Icon(
+                              Icons.person,
+                              size: 50,
                               color: Colors.white,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.person_outline,
-                              size: 40,
-                              color: primaryGreen,
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 15),
-                      const Text(
+                      SizedBox(height: 15),
+                      Text(
                         'Welcome, Student!',
                         style: TextStyle(
                           color: Colors.white,
@@ -92,8 +82,8 @@ class StudentDashboardPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 5),
-                      const Text(
+                      SizedBox(height: 5),
+                      Text(
                         'Your academic summary is here.',
                         style: TextStyle(color: Colors.white70, fontSize: 14),
                       ),
@@ -104,7 +94,7 @@ class StudentDashboardPage extends StatelessWidget {
             ),
           ),
 
-          // Grid of Student Dashboard Items
+          // Grid of dashboard items, reusing the consistent Card and InkWell style
           SliverPadding(
             padding: const EdgeInsets.all(20.0),
             sliver: SliverGrid(
@@ -124,15 +114,29 @@ class StudentDashboardPage extends StatelessWidget {
                   icon: item['icon'],
                   color: item['color'],
                   onTap: () {
-                    // TODO: Implement navigation for each student-specific page
+                    if (item['title'] == 'View Rank') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const StudentRankPage(),
+                        ),
+                      );
+                    } else if (item['title'] == 'View Marks') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const StudentRankPage(),
+                        ),
+                      );
+                    } else if (item['title'] == 'View Attendance') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const StudentAttendancePage(),
+                        ),
+                      );
+                    }
                     print('${item['title']} clicked!');
-                    // Example navigation (will implement pages later)
-                    // if (item['title'] == 'View Rank') {
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(builder: (context) => const StudentRankPage()),
-                    //   );
-                    // }
                   },
                 );
               }, childCount: dashboardItems.length),
@@ -144,7 +148,7 @@ class StudentDashboardPage extends StatelessWidget {
   }
 }
 
-// Reusing the DashboardGridItem widget from the teacher dashboard
+// Reusing the DashboardGridItem widget to maintain consistency across the app
 class DashboardGridItem extends StatelessWidget {
   final String title;
   final IconData icon;
