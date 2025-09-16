@@ -23,6 +23,23 @@ class _StudentRankPageState extends State<StudentRankPage> {
 
     return Scaffold(
       backgroundColor: Colors.grey[100],
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [primaryGreen, lightGreen],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+      ),
       body: Stack(
         children: [
           // This container creates the curved top section with the gradient
@@ -47,26 +64,11 @@ class _StudentRankPageState extends State<StudentRankPage> {
           ),
           // Custom Back Button positioned in the top-left corner
           Positioned(
-            top: 40,
-            left: 10,
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: () => Navigator.pop,
-            ),
+            top: 50,
+            left: 20,
+            child: Material(color: Colors.transparent),
           ),
           // Positioned title
-          const Positioned(
-            top: 50,
-            left: 60,
-            child: Text(
-              'View Rank',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
           // The main content of the page, including the rank card
           Positioned.fill(
             child: SingleChildScrollView(
