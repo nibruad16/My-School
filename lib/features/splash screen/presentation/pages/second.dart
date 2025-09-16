@@ -103,7 +103,7 @@ class SecondScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => StudentDashboardPage(),
+                            builder: (context) => const StudentDashboardPage(),
                           ),
                         );
                       },

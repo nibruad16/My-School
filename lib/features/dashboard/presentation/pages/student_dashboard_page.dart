@@ -2,16 +2,15 @@
 import 'package:flutter/material.dart';
 
 // Import the student-specific pages for navigation
-import 'package:myapp/features/results/presentation/pages/student_results_page.dart';
 import 'package:myapp/features/attendance/presentation/pages/student_attendance_page.dart';
 import 'package:myapp/features/results/presentation/pages/student_rank_page.dart';
+import 'package:myapp/features/view_mark/presentation/pages/view_makes.dart';
 
 class StudentDashboardPage extends StatelessWidget {
   const StudentDashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Reusing the same color palette for consistency
     const Color primaryGreen = Color(0xFF26A69A);
     const Color lightGreen = Color(0xFF66BB6A);
 
@@ -37,7 +36,6 @@ class StudentDashboardPage extends StatelessWidget {
       backgroundColor: Colors.grey[100],
       body: CustomScrollView(
         slivers: [
-          // Dynamic header with gradient, consistent with the teacher's dashboard
           SliverAppBar(
             expandedHeight: 200.0,
             floating: false,
@@ -93,8 +91,6 @@ class StudentDashboardPage extends StatelessWidget {
               ),
             ),
           ),
-
-          // Grid of dashboard items, reusing the consistent Card and InkWell style
           SliverPadding(
             padding: const EdgeInsets.all(20.0),
             sliver: SliverGrid(
@@ -125,7 +121,7 @@ class StudentDashboardPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const StudentRankPage(),
+                          builder: (context) => const StudentMarksPage(),
                         ),
                       );
                     } else if (item['title'] == 'View Attendance') {

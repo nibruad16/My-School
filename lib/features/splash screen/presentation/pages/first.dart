@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/features/splash%20screen/presentation/pages/second.dart';
+import 'package:myapp/features/splash screen/presentation/pages/second.dart';
 
 class firstscreen extends StatelessWidget {
   const firstscreen({super.key});
